@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Trap
   layers:
   - Default
   - TransparentFX
@@ -38,12 +39,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: d1
-    uniqueID: 3354748477
-    locked: 0
-  - name: d2
-    uniqueID: 1711060151
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

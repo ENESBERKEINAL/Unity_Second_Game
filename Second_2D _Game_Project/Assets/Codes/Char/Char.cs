@@ -8,10 +8,16 @@ public class Char : MonoBehaviour
     public bool Yerdemi,SecondJump;
     Rigidbody2D agirlik;
     Animator anim;
+
+    public int Heal, MaxHeal;
+
+    public GameObject[] Heals;
     void Start()
     {
         anim = GetComponent<Animator>();
-        agirlik = GetComponent<Rigidbody2D>(); 
+        agirlik = GetComponent<Rigidbody2D>();
+        Heal = 3;
+        CanSistemi();
     }
 
     void Update()
@@ -31,6 +37,10 @@ public class Char : MonoBehaviour
                     agirlik.AddForce(Vector2.up * JumpPower/2);
                 }
             }
+        }
+        if(Heal <= 0)
+        {
+            dead();
         }
     }
     void FixedUpdate()
@@ -59,5 +69,39 @@ public class Char : MonoBehaviour
         {
             agirlik.velocity = new Vector2(-MaxSpeed, agirlik.velocity.y);
         }
+    }
+
+    [System.Obsolete]
+    void dead()
+    { 
+        Application.LoadLevel(Application.loadedLevel);
+    }
+
+    private void OnCollisionEnter2D(Collision2D nesne)
+    {
+        if (nesne.gameObject.tag == "Trap") 
+        {
+            Heal -= 1;
+            agirlik.AddForce(Vector2.up * JumpPower);
+            CanSistemi();
+            GetComponent<SpriteRenderer>().color = Color.red;
+            Invoke("Duzelt",0.5f);
+            
+        }
+    }
+    void CanSistemi()
+    {
+        for(int i = 0; i < MaxHeal; i++)
+        {
+            Heals[i].SetActive(false);
+        }
+        for(int i = 0; i < Heal; i++)
+        {
+            Heals[i].SetActive(true); 
+        }
+    }
+    void Duzelt()
+    {
+        GetComponent<SpriteRenderer>().color = Color.white;
     }
 }
