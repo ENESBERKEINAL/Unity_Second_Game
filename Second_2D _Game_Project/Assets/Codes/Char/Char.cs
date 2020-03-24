@@ -43,6 +43,8 @@ public class Char : MonoBehaviour
             dead();
         }
     }
+
+    [System.Obsolete]
     void FixedUpdate()
     {
         float h = Input.GetAxis("Horizontal");
@@ -50,7 +52,10 @@ public class Char : MonoBehaviour
         anim.SetFloat("Speed", Mathf.Abs(h));
         anim.SetBool ("Yerde",Yerdemi);
 
-
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Application.LoadLevel(Application.loadedLevel);
+        }
         if(h> 0.1f)             //Char is going riht
         {
             transform.localScale = new Vector2(-1,1);
@@ -85,8 +90,16 @@ public class Char : MonoBehaviour
             agirlik.AddForce(Vector2.up * JumpPower);
             CanSistemi();
             GetComponent<SpriteRenderer>().color = Color.red;
-            Invoke("Duzelt",0.5f);
+            Invoke("Duzelt",0.5f); 
             
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Paper")
+        {
+            Destroy(collision.gameObject);
         }
     }
     void CanSistemi()
