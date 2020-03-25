@@ -11,6 +11,7 @@ public class Char : MonoBehaviour
     Animator anim;
     public int Heal, MaxHeal,Paper;
     public Text PaperCounter;
+    public AudioClip[] Sesler;
     
     public GameObject[] Heals;
     void Start()
@@ -49,6 +50,16 @@ public class Char : MonoBehaviour
     [System.Obsolete]
     void FixedUpdate()
     {
+        /*
+        if (h < 0)
+        {
+            transform.Translate(-h * Speed * Time.deltaTime);
+        }
+        if (h > 0)                                                              //COde Blocks of non slide Ground
+        {
+            transform.Translate(h * Speed * Time.deltaTime);
+        }
+        */
         float h = Input.GetAxis("Horizontal");
         agirlik.AddForce(Vector2.right * h * Speed);
         anim.SetFloat("Speed", Mathf.Abs(h));
@@ -102,6 +113,7 @@ public class Char : MonoBehaviour
         if(collision.gameObject.tag == "Paper")
         {
             Paper++;
+            GetComponent<AudioSource>().PlayOneShot(Sesler[0]);
             Destroy(collision.gameObject);
         }
     }

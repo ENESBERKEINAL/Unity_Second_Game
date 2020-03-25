@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Codes\CameraFollow.cs" />
     <Compile Include="Assets\Codes\Char\Char.cs" />
     <Compile Include="Assets\Codes\Char\ZeminTrigger.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
