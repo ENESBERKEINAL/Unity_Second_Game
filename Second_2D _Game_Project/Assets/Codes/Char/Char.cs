@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Char : MonoBehaviour
 {
@@ -8,9 +9,9 @@ public class Char : MonoBehaviour
     public bool Yerdemi,SecondJump;
     Rigidbody2D agirlik;
     Animator anim;
-
-    public int Heal, MaxHeal;
-
+    public int Heal, MaxHeal,Paper;
+    public Text PaperCounter;
+    
     public GameObject[] Heals;
     void Start()
     {
@@ -22,6 +23,7 @@ public class Char : MonoBehaviour
 
     void Update()
     {
+        PaperCounter.text = "" + Paper;
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (Yerdemi)
@@ -99,6 +101,7 @@ public class Char : MonoBehaviour
     {
         if(collision.gameObject.tag == "Paper")
         {
+            Paper++;
             Destroy(collision.gameObject);
         }
     }
